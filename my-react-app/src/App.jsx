@@ -37,14 +37,12 @@
 
 // ### 1. Personal Greeting Card
 
-// import React from 'react';
+// import React from "react";
 
-// function GreetingCard(props) {
-//   const {name} = props;
-
+// function GreetingCard({ name }) {
 //   return (
 //     <div>
-//       <p>Hello, {"piotr"}!</p>
+//       <p>Hello, {"Piotr"}!</p>
 //     </div>
 //   );
 // }
@@ -63,7 +61,7 @@
 //   return (
 //     <div>
 //       <h2>{name}</h2>
-//       <p>Email: {email}</p>
+//       <h3>Email: {email}</h3>
 //     </div>
 //   );
 // }
@@ -101,36 +99,17 @@
 //   const [count, setCount] = useState(0);
 
 //   return (
-//     <>
-//       <div>
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           total clicks {count}
-//         </button>
-//       </div>
-//     </>
+//     <div>
+//       <button onClick={() => setCount((count) => count + 1)}>
+//         total clicks {count}
+//       </button>
+//     </div>
 //   );
 // }
 
 // export default LikeButton;
 
 // ### 4. Todo List Item
-
-// - Build a `Todo` component that displays a task. It should accept the task name as a prop and have a checkbox next to it.
-//  When the checkbox is checked, the task name should have a strikethrough.
-
-// import React from 'react';
-
-// function App(){
-//   return (
-//     <div>
-//       <h1>ToDo</h1>
-//       <input type="text" placeholder='Add an item...' />
-//       <input type="checkbox" name="deleteItem" id="" />
-//     </div>
-//   )
-// }
-
-// export default App
 
 // import React, { useState } from 'react';
 
@@ -243,7 +222,7 @@
 //       <div onClick={toggleAccordion} style={{ cursor: 'pointer' }}>
 //         <h3>Title{title}</h3>
 //       </div>
-//       {!isCollapsed && <div>"content content content content content content content content"{content}</div>}
+//       {!isCollapsed && <div>"content content content content content content content content" {content}</div>}
 //     </div>
 //   );
 // }
@@ -288,9 +267,139 @@
 
 // export default App;
 
+// import React from "react";
+// import InnyKomponent from "./test.jsx";
+// import Button from "./Button.jsx";
+// import "./App.css";
+
+// function Hello() {
+//   return <h1>Witaj piękny Świecie!</h1>;
+// }
+
+// function App() {
+//   return (
+//     <>
+
+//     <h1>{name}</h1>
+//       <div className="myClass">
+//         <p>Devstock rules!!!</p>
+//         <Button text="Wyślij" />
+//       </div>
+//       <div>
+//         <Hello />
+//         <InnyKomponent />
+//         <Button text="Anuluj" />
+//       </div>
+//     </>
+//   );
+// }
+
+// export default App;
 
 // ### 7. Comment System
 
-// - Build a `Comment` component that takes username and commentText as props. Next, make a `CommentList` component that receives an array of comments. 
-// This should display a list of comments, demonstrating props drilling as you pass individual comment details down to the `Comment` component.
-//  Add a counter at the top of the `CommentList` showing the number of comments.
+// import React from "react";
+
+// function Comment({ name, text }) {
+//   return (
+//     <div className="comment">
+//       <strong>{name}</strong>
+//       {text}
+//     </div>
+//   );
+// }
+// function CommentList({ comments }) {
+//   return (
+//     <div>
+//       <h2>Comments ({comments.length})</h2>
+//       {comments.map((comment) => (
+//         <Comment name={comment.name} text={comment.text} />
+//       ))}
+//     </div>
+//   );
+// }
+
+// function App() {
+//   const comments = [
+//     { name: "User1", text: " This is the first comment." },
+//     { name: "User2", text: " Another comment here." },
+//     { name: "User1", text: " Another comment here." },
+//     { name: "User2", text: " Another comment here." },
+//   ];
+
+//   return (
+//     <div>
+//       <CommentList comments={comments} />
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// ### 8. Dynamic Tabs
+
+// - Create a `Tab` component that takes a label and children. Then, make a `TabList` component that composes multiple Tab components.
+// Only the content of the selected tab should be visible. This will involve passing down callback functions as props and lifting up state.
+
+// import React, { useState } from "react";
+
+// function Tab({ label, children }) {
+//   return (
+//     <div>
+//       <h2>{label}</h2>
+//       <div>{children}</div>
+//     </div>
+//   );
+// }
+
+// function TabList({ children }) {
+//   const [selectedTab, setSelectedTab] = useState(0);
+
+//   const handleTabClick = (index) => {
+//     setSelectedTab(index);
+//   };
+
+//   return (
+//     <div>
+//       <ul>
+//         {React.Children.map(children, (child, index) => (
+//           <li
+//           style={{
+//             cursor: "pointer",
+//             backgroundColor: selectedTab === index ? "gray" : "initial",
+
+//           }}
+//             key={index}
+//             onClick={() => handleTabClick(index)}
+//             className={selectedTab === index ? "active" : ""}
+//           >
+//             {child.props.label}
+//           </li>
+//         ))}
+//       </ul>
+//       <div>{children[selectedTab]}</div>
+//     </div>
+//   );
+// }
+// function App() {
+//   return (
+//     <div>
+//       <h1>Tab Example</h1>
+//       <TabList>
+//         <Tab label="Tab 1">Content for Tab 1</Tab>
+//         <Tab label="Tab 2">Content for Tab 2</Tab>
+//         <Tab label="Tab 3">Content for Tab 3</Tab>
+//       </TabList>
+//     </div>
+//   );
+// }
+
+// export default App;
+
+// ### 9. Theme Switcher
+
+// - Design a `ThemeProvider` component that wraps around other components and provides a light or dark theme to them.
+// Components inside `ThemeProvider` should change their background and text colors based on the theme.
+// Use useState to toggle between light and dark themes. Also, implement a `ThemeButton` inside the `ThemeProvider` to toggle the theme.
+
+
